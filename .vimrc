@@ -2,16 +2,14 @@
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'morhetz/gruvbox'
-Plug 'scrooloose/nerdcommenter'
-Plug 'jiangmiao/auto-pairs'
-Plug 'ycm-core/YouCompleteMe'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'easymotion/vim-easymotion'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'preservim/nerdtree'
+Plug 'scrooloose/nerdcommenter' " quickly comment out lines of code with <leader><cc> or <leader><cs> (use <leader><cu> to undo)
+Plug 'jiangmiao/auto-pairs' " autocompletes () {} and []
+Plug 'ycm-core/YouCompleteMe' " autocomplete for almost every language
+Plug 'easymotion/vim-easymotion' " easy motion navigation
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " see below
+Plug 'junegunn/fzf.vim' " enables fzf search within vim with <CTRL-p>
+Plug 'preservim/nerdtree' " file tree access with <CTRL-n>
+Plug 'mattn/emmet-vim' " emmet.vim for web dev stuff
 
 call plug#end()
 
@@ -19,13 +17,10 @@ call plug#end()
 
 " visual settings
 syntax on " enables syntax highlighting
-colorscheme gruvbox " sets colorscheme to gruvbox
-let g:gruvbox_contrast_dark='hard' " sets gruvbox contrast to hard, default is medium
-set background=dark " sets background to dark mode
+colorscheme peachpuff " sets colorscheme to peachpuff
 set number relativenumber " enables hybrid line numbers (mix of relative + absolute)
 set nowrap " turns off line wrapping
-let g:airline_theme='gruvbox' " sets status bar theme to gruvbox theme
-set colorcolumn=80 " enables 80 character column
+set ruler " displays the line and column number in bottom right
 
 " remap leader key
 let mapleader="," " remaps leader key from \ to ,
@@ -38,6 +33,7 @@ set tabstop=4 " vim reads tab characters as 4 columns
 set softtabstop=4 " pressing <TAB> inserts 4 columns
 set shiftwidth=4 " << and >> commands shift lines 4 columns to the left and right respectively
 set expandtab " tabs are turned into the equivalent ammount of spaces
+autocmd FileType html setlocal shiftwidth=2 tabstop=2 wrap linebreak " changes settings for html
 
 " searching
 set incsearch " enables incremental searching
@@ -51,7 +47,6 @@ filetype plugin indent on " enables smart indenting based on the type of file
 " plugin settings
 let g:ycm_show_diagnostics_ui=0 " turns off YCM linter
 set completeopt-=preview " turns off the YCM preview window
-let g:airline#extensions#whitespace#mixed_indent_algo=1 " better white space detection algo that works with comments in c/c++
 
 " remap easymotion settings -> default is <leader><leader><motion>, this makes it <leader><motion>
 map <leader> <Plug>(easymotion-prefix)
@@ -62,7 +57,7 @@ set backspace=indent,eol,start
 " set vim.swp file storage directory
 set directory^=$HOME/.vim/swapfiles//
 
-" toggle nerd tree
+" toggle nerd tree with <CTRL-n>
 map <C-n> :NERDTreeToggle<CR>
 
 " remap :Files fzf command to <CTRL-p>
